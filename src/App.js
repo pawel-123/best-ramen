@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
-import Restaurant from './Restaurant'
-// import City from './City'
+import Header from './Header';
+import Restaurant from './Restaurant';
+// import City from './City';
 
 function App() {
 
@@ -52,7 +52,7 @@ function App() {
 
     return(
         <div>
-            <h1>Welcome to Best Ramen!</h1>
+            <Header />
             {/* <form onSubmit={getSearch}>
                 <input type="text" value={search} onChange={updateSearch}/>
                 <button type="submit">Search</button>
