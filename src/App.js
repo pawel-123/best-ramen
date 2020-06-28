@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Restaurant from './Restaurant';
+import './index.css';
 // import City from './City';
 
 function App() {
