@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Restaurant from './Restaurant'
-import City from './City'
+// import City from './City'
 
 function App() {
 
     const [restaurants, setRestaurants] = useState([]);
     const [search, setSearch] = useState("");
     const [query, setQuery] = useState("");
-    const [cities, setCities] = useState([]);
+    // const [cities, setCities] = useState([]);
 
     useEffect(() => {
         getRestaurants();
     }, [query]);
 
-    useEffect(() => {
-        console.log(`Query is currently: ${query}`)
-        if (query.length > 0)
-            getCities();
-    }, [query]);
+    // useEffect(() => {
+    //     if (query.length > 0)
+    //         getCities();
+    // }, [query]);
 
     const getRestaurants = async () => {
-        const response = await fetch("https://developers.zomato.com/api/v2.1/search?count=10&cuisines=320&sort=rating&order=desc", {
+        const response = await fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=${query}&entity_type=city&count=10&cuisines=320&sort=rating&order=desc`, {
             headers: {
               Accept: "application/json",
               "User-Key": "d1b1d251eb3a0f96b582683ef476f0b0"
@@ -31,30 +30,30 @@ function App() {
         setRestaurants(data.restaurants);
     }
 
-    const getCities = async () => {
-        const response = await fetch(`https://developers.zomato.com/api/v2.1/cities?q=${query}`, {
-            headers: {
-              Accept: "application/json",
-              "User-Key": "d1b1d251eb3a0f96b582683ef476f0b0"
-            }
-          });
-        const data = await response.json();
-        setCities(data.location_suggestions);
-    }
+    // const getCities = async () => {
+    //     const response = await fetch(`https://developers.zomato.com/api/v2.1/cities?q=${query}`, {
+    //         headers: {
+    //           Accept: "application/json",
+    //           "User-Key": "d1b1d251eb3a0f96b582683ef476f0b0"
+    //         }
+    //       });
+    //     const data = await response.json();
+    //     setCities(data.location_suggestions);
+    // }
 
-    const updateSearch = e => {
-        setSearch(e.target.value)
-    }
+    // const updateSearch = e => {
+    //     setSearch(e.target.value)
+    // }
 
-    const getSearch = e => {
-        e.preventDefault();
-        setQuery(search);
-    }
+    // const getSearch = e => {
+    //     e.preventDefault();
+    //     setQuery(search);
+    // }
 
     return(
         <div>
             <h1>Welcome to Best Ramen!</h1>
-            <form onSubmit={getSearch}>
+            {/* <form onSubmit={getSearch}>
                 <input type="text" value={search} onChange={updateSearch}/>
                 <button type="submit">Search</button>
             </form>
@@ -68,7 +67,7 @@ function App() {
                         country_flag_url={city.country_flag_url}
                     />
                 ))
-            }
+            } */}
             {restaurants.map(restaurant => (
                 <Restaurant
                     key={restaurant.restaurant.id} 
