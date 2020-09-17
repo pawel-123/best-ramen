@@ -2,31 +2,30 @@ import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Restaurant from './Restaurant';
 import './index.css';
+import { fetchData } from './api/api'
 
 function App() {
 
     const [restaurants, setRestaurants] = useState([]);
-    const [search, setSearch] = useState("");
-    const [query, setQuery] = useState("");
+    const [count, setCount] = useState(10);
 
     useEffect(() => {
+        const getRestaurants = async () => {
+            const data = await fetchData(count);
+            setRestaurants(data.restaurants);
+        }
         getRestaurants();
-    }, [query]);
+    }, [count]);
 
-    const getRestaurants = async () => {
-        const response = await fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=${query}&entity_type=city&count=10&cuisines=320&sort=rating&order=desc`, {
-            headers: {
-                Accept: "application/json",
-                "User-Key": "d1b1d251eb3a0f96b582683ef476f0b0"
-            }
-        });
-        const data = await response.json();
-        setRestaurants(data.restaurants);
+    const onChange = (event) => {
+        const restaurantCount = event.currentTarget.value;
+        setCount(Number(restaurantCount));
     }
 
     return (
         <div>
             <Header />
+            <input type="number" onChange={onChange}></input>
             {restaurants.map(restaurant => (
                 <Restaurant
                     key={restaurant.restaurant.id}
