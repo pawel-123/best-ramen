@@ -1,45 +1,48 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
+import {zomatoBaseUrl} from './constants/constants';
+import {apiRequest} from './api/api';
 import Header from './Header';
 import Restaurant from './Restaurant';
 import './index.css';
 
 function App() {
+  const [restaurants, setRestaurants] = useState([]);
+  const [count, setCount] = useState(2);
 
-  // asdjkf
+  useEffect(() => {
+    getRestaurants(count);
+  }, [count]);
 
-    const [restaurants, setRestaurants] = useState([]);
-    const [search, setSearch] = useState("");
-    const [query, setQuery] = useState("");
+  const getRestaurants = async count => {
+    const data = await apiRequest({count});
+    setRestaurants(data);
+  };
 
-    useEffect(() => {
-        getRestaurants();
-    }, [query]);
+  const onChange = e => {
+    const newCount = Number(e.currentTarget.value || 10);
+    setCount(newCount);
+  };
 
-    const getRestaurants = async () => {
-        const response = await fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=${query}&entity_type=city&count=10&cuisines=320&sort=rating&order=desc`, {
-            headers: {
-                Accept: "application/json",
-                "User-Key": "d1b1d251eb3a0f96b582683ef476f0b0"
+  return (
+    <div>
+      <Header />
+      <input type="number" onChange={onChange} />
+      {restaurants &&
+        restaurants.map(restaurant => (
+          <Restaurant
+            key={restaurant.restaurant.id}
+            name={restaurant.restaurant.name}
+            city={restaurant.restaurant.location.city}
+            rating={restaurant.restaurant.user_rating.aggregate_rating}
+            photo={
+              restaurant.restaurant.featured_image
+                ? restaurant.restaurant.featured_image
+                : 'https://static.thenounproject.com/png/18272-200.png'
             }
-        });
-        const data = await response.json();
-        setRestaurants(data.restaurants);
-    }
-
-    return (
-        <div>
-            <Header />
-            {restaurants.map(restaurant => (
-                <Restaurant
-                    key={restaurant.restaurant.id}
-                    name={restaurant.restaurant.name}
-                    city={restaurant.restaurant.location.city}
-                    rating={restaurant.restaurant.user_rating.aggregate_rating}
-                    photo={restaurant.restaurant.featured_image ? restaurant.restaurant.featured_image : "https://static.thenounproject.com/png/18272-200.png"}
-                />
-            ))}
-        </div>
-    )
+          />
+        ))}
+    </div>
+  );
 }
 
 export default App;
