@@ -10,6 +10,7 @@ function App() {
     const [count, setCount] = useState(10);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         setIsLoading(true);
@@ -19,6 +20,7 @@ function App() {
                 const data = await fetchData(count);
                 setRestaurants(data.restaurants);
             } catch (error) {
+                setErrorMessage(error.toString())
                 setIsError(true);
             }
             setIsLoading(false);
@@ -51,7 +53,7 @@ function App() {
                     ))
                 )}
 
-            {isError && <p>Error in fetching restaurants</p>}
+            {isError && <p>Error: {errorMessage}</p>}
 
         </div>
     )
