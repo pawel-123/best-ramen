@@ -9,7 +9,7 @@ import { fetchData } from './api/api'
 function App() {
 
     const [restaurants, setRestaurants] = useState([]);
-    const [count, setCount] = useState(3);
+    const [count, setCount] = useState(5);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -44,10 +44,12 @@ function App() {
 
                 <Route path="/:id" exact component={RestaurantDetail} />
 
-                {isLoading ? (
-                    <p>Loading...</p>
-                ) : (
-                        restaurants && restaurants.map(restaurant => (
+
+                {isLoading
+                    ? <p>Loading...</p>
+                    : (isError
+                        ? <p>Error: {errorMessage}</p>
+                        : restaurants.map(restaurant => (
                             <Restaurant
                                 key={restaurant.restaurant.id}
                                 id={restaurant.restaurant.id}
@@ -59,7 +61,6 @@ function App() {
                         ))
                     )}
 
-                {isError && <p>Error: {errorMessage}</p>}
             </div>
         </BrowserRouter>
     )
