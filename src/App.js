@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from './Header';
 import Restaurant from './Restaurant';
 import RestaurantDetail from './RestaurantDetail';
+import CountForm from './CountForm';
 import './index.css';
 import { fetchData } from './api/api'
 
@@ -31,7 +32,7 @@ function App() {
         getRestaurants();
     }, [count]);
 
-    const onChange = (event) => {
+    const updateCount = (event) => {
         const restaurantCount = event.currentTarget.value;
         setCount(Number(restaurantCount));
     }
@@ -40,7 +41,7 @@ function App() {
         <BrowserRouter>
             <div>
                 <Header />
-                <input type="number" onChange={onChange}></input>
+                <CountForm updateCount={updateCount} />
 
                 <Route path="/:id" exact component={RestaurantDetail} />
 
