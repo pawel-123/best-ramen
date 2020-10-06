@@ -7,15 +7,11 @@ const RestaurantDetail = ({ match }) => {
 
     useEffect(() => {
         const getRestaurantDetail = async () => {
-            const data = await fetchRestaurant();
+            const data = await fetchRestaurant(match);
             setRestaurant(data);
         }
 
         getRestaurantDetail();
-        // added eslint-disable-next-line based on warning when compiling:
-        // "React Hook useEffect has a missing dependency: 'fetchRestaurant'. Either include it or remove the dependency array"
-        // is there a better way to solve this?
-        // eslint-disable-next-line
     }, [restaurant]);
 
     return (
