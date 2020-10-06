@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from './Header';
 import Restaurant from './Restaurant';
+import RestaurantDetail from './RestaurantDetail';
 import './index.css';
 import { fetchData } from './api/api'
 
 function App() {
 
     const [restaurants, setRestaurants] = useState([]);
-    const [count, setCount] = useState(10);
+    const [count, setCount] = useState(3);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -35,27 +37,31 @@ function App() {
     }
 
     return (
-        <div>
-            <Header />
-            <input type="number" onChange={onChange}></input>
+        <BrowserRouter>
+            <div>
+                <Header />
+                <input type="number" onChange={onChange}></input>
 
-            {isLoading ? (
-                <p>Loading...</p>
-            ) : (
-                    restaurants.map(restaurant => (
-                        <Restaurant
-                            key={restaurant.restaurant.id}
-                            name={restaurant.restaurant.name}
-                            city={restaurant.restaurant.location.city}
-                            rating={restaurant.restaurant.user_rating.aggregate_rating}
-                            photo={restaurant.restaurant.featured_image ? restaurant.restaurant.featured_image : "https://static.thenounproject.com/png/18272-200.png"}
-                        />
-                    ))
-                )}
+                <Route path="/:id" exact component={RestaurantDetail} />
 
-            {isError && <p>Error: {errorMessage}</p>}
+                {isLoading ? (
+                    <p>Loading...</p>
+                ) : (
+                        restaurants && restaurants.map(restaurant => (
+                            <Restaurant
+                                key={restaurant.restaurant.id}
+                                id={restaurant.restaurant.id}
+                                name={restaurant.restaurant.name}
+                                city={restaurant.restaurant.location.city}
+                                rating={restaurant.restaurant.user_rating.aggregate_rating}
+                                photo={restaurant.restaurant.featured_image ? restaurant.restaurant.featured_image : "https://static.thenounproject.com/png/18272-200.png"}
+                            />
+                        ))
+                    )}
 
-        </div>
+                {isError && <p>Error: {errorMessage}</p>}
+            </div>
+        </BrowserRouter>
     )
 }
 
