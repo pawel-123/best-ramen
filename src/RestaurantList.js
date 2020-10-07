@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import { fetchData } from './api/api';
+import { Spin } from 'antd';
 
 const RestaurantList = ({ count }) => {
     const [restaurants, setRestaurants] = useState([]);
@@ -28,7 +29,7 @@ const RestaurantList = ({ count }) => {
     return (
         <div>
             {isLoading
-                ? <p>Loading...</p>
+                ? <Spin />
                 : (isError
                     ? <p>Error: {errorMessage}</p>
                     : restaurants.map(restaurant => (

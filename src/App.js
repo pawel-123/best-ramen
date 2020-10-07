@@ -22,13 +22,11 @@ function App() {
 
                 <Route path="/" exact render={(props) => (
                     <CountForm {...props} updateCount={updateCount} />
-                )}
-                />
+                )} />
 
                 <Route path="/" exact render={(props) => (
                     <RestaurantList {...props} count={count} />
-                )}
-                />
+                )} />
 
                 <Route path="/:id" exact component={RestaurantDetail} />
 
