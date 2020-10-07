@@ -10,9 +10,9 @@ function App() {
 
     const [count, setCount] = useState(5);
 
-    const updateCount = (event) => {
-        const restaurantCount = event.currentTarget.value;
-        setCount(Number(restaurantCount));
+    // simplified updateCount function due to use of Ant Design InputNumber component in CountForm
+    const updateCount = (value) => {
+        setCount(value);
     }
 
     return (
