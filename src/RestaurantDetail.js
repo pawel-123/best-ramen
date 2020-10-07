@@ -12,7 +12,7 @@ const RestaurantDetail = ({ match }) => {
         }
 
         getRestaurantDetail();
-    }, [restaurant]);
+    }, [match]);
 
     return (
         <div>
