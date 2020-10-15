@@ -17,13 +17,30 @@ const RestaurantDetail = ({ match }) => {
         getRestaurantDetail();
     }, [match]);
 
+    // nested desctructuring to make the return more concise
+    const {
+        featured_image,
+        name,
+        id,
+        location: {
+            city,
+        },
+        user_rating: {
+            aggregate_rating,
+        },
+    } = restaurant;
+
     return (
         <div>
-            <img src={restaurant.featured_image ? restaurant.featured_image : "https://static.thenounproject.com/png/18272-200.png"} alt={`${restaurant.name}`} />
-            <h1>Name: {restaurant.name}</h1>
-            <p>ID: {restaurant.id}</p>
-            <p>City: {restaurant.location.city}</p>
-            <p>Rating: {restaurant.user_rating.aggregate_rating}</p>
+            <img src={featured_image
+                ? featured_image
+                : "https://static.thenounproject.com/png/18272-200.png"}
+                alt={`${name}`}
+            />
+            <h1>Name: {name}</h1>
+            <p>ID: {id}</p>
+            <p>City: {city}</p>
+            <p>Rating: {aggregate_rating}</p>
         </div>
     )
 }

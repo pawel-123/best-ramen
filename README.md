@@ -8,6 +8,16 @@ The app also allows searching for the cities based on the Zomato API. The intent
 
 Best Ramen was my second React app, and it was initally set up initially using the [Create React App](https://github.com/facebook/create-react-app) boilerplate.
 
+## How to set up
+
+1. Install dependencies
+
+\\\ npm install
+
+2. Start the application
+
+\\\ npm start
+
 ## Learnings
 - Convert cURL from Zomato API to fetch
 - Map restaurants data fetched from a Zomato API (using API Key) to a Restaurant components
