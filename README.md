@@ -6,7 +6,7 @@ The app allows changing the number of results displayed on the page via input fi
 
 ## Technology
 
-Best Ramen was my second React app, and it was initally set up initially using the [Create React App](https://github.com/facebook/create-react-app) boilerplate.
+Best Ramen was my second React app, and it was initally set up using the [Create React App](https://github.com/facebook/create-react-app) boilerplate.
 
 ## How to set up
 
