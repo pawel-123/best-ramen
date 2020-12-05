@@ -3,10 +3,7 @@ import { fetchRestaurant } from './api/api'
 
 const RestaurantDetail = ({ match }) => {
 
-    const [restaurant, setRestaurant] = useState(
-        // location: {},
-        // user_rating: {}
-    );
+    const [restaurant, setRestaurant] = useState();
 
     useEffect(() => {
         const getRestaurantDetail = async () => {
@@ -21,7 +18,6 @@ const RestaurantDetail = ({ match }) => {
         return <div>loading</div>
     }
 
-    // nested desctructuring to make the return more concise
     const {
         featured_image,
         name,
