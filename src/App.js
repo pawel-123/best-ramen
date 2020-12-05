@@ -10,27 +10,20 @@ function App() {
 
     const [count, setCount] = useState(5);
 
-    // simplified updateCount function due to use of Ant Design InputNumber component in CountForm
-    const updateCount = (value) => {
-        setCount(value);
-    }
-
     return (
         <BrowserRouter>
-            <div>
-                <Header />
+            <Header />
 
-                <Route path="/" exact render={(props) => (
-                    <CountForm {...props} updateCount={updateCount} />
-                )} />
+            <Route path="/" exact render={(props) => (
+                <CountForm {...props} updateCount={setCount} />
+            )} />
 
-                <Route path="/" exact render={(props) => (
-                    <RestaurantList {...props} count={count} />
-                )} />
+            <Route path="/" exact render={(props) => (
+                <RestaurantList {...props} count={count} />
+            )} />
 
-                <Route path="/:id" exact component={RestaurantDetail} />
+            <Route path="/:id" exact component={RestaurantDetail} />
 
-            </div>
         </BrowserRouter>
     )
 }

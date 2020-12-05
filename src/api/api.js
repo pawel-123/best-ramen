@@ -11,7 +11,9 @@ export const fetchData = async (count) => {
     return data;
 }
 
+
 export const fetchRestaurant = async (match) => {
+
     const response = await fetch(`${zomatoApiBase}restaurant?res_id=${match.params.id}`, {
         headers: {
             Accept: "application/json",

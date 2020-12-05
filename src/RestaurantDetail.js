@@ -3,10 +3,10 @@ import { fetchRestaurant } from './api/api'
 
 const RestaurantDetail = ({ match }) => {
 
-    const [restaurant, setRestaurant] = useState({
-        location: {},
-        user_rating: {}
-    });
+    const [restaurant, setRestaurant] = useState(
+        // location: {},
+        // user_rating: {}
+    );
 
     useEffect(() => {
         const getRestaurantDetail = async () => {
@@ -16,6 +16,10 @@ const RestaurantDetail = ({ match }) => {
 
         getRestaurantDetail();
     }, [match]);
+
+    if (!restaurant) {
+        return <div>loading</div>
+    }
 
     // nested desctructuring to make the return more concise
     const {
@@ -32,7 +36,7 @@ const RestaurantDetail = ({ match }) => {
 
     return (
         <div>
-            <img src={featured_image
+            <img className="restphoto-detail" src={featured_image
                 ? featured_image
                 : "https://static.thenounproject.com/png/18272-200.png"}
                 alt={`${name}`}
